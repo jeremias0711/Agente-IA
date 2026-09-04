@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pikachu EX · Carta JCC Pokémon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!--
+    El HTML es UNO SOLO para las dos versiones (móvil y web).
+    Las media queries no cambian el contenido ni la estructura:
+    solo cambian CÓMO se acomoda ese mismo contenido en el espacio.
+
+    Contenido: datos de la carta "Pikachu EX" (JCC Pokémon, XY Promo 174).
+    Tema visual inspirado en la galería "Tinieblas Umbrías" (Pitch Black).
+  -->
+
+  <!--
+    Carta holográfica interactiva.
+    Animaciones y efecto "foil" adaptados de github.com/simeydotme/pokemon-cards-css
+    (MIT). script.js traduce la posición del puntero a variables CSS.
+  -->
+  <div class="holo-stage">
+    <p class="holo-stage__hint">Mueve el cursor sobre la carta · clic para ampliar</p>
+
+    <div class="card lightning interactive"
+         data-rarity="rare holo"
+         data-subtypes="basic">
+      <div class="card__translater">
+        <button type="button" class="card__rotator" aria-label="Carta Pikachu EX, XY Promo 174">
+          <img class="card__front"
+               src="img/pikachu-ex.jpg"
+               width="660" height="921"
+               alt="Carta Pikachu EX del JCC Pokémon, ilustración de 5ban Graphics">
+          <div class="card__shine" aria-hidden="true"></div>
+          <div class="card__glare" aria-hidden="true"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="Header">
+      <span class="corner corner--tl" aria-hidden="true"></span>
+      <span class="corner corner--tr" aria-hidden="true"></span>
+      <p class="kicker">Básico · Pokémon-EX</p>
+      <h1>Pikachu <span class="ex">EX</span></h1>
+      <p class="sci">Tipo Rayo · Ilus. 5ban Graphics</p>
+      <span class="hp" aria-label="Puntos de vida">PS 130 ⚡</span>
+    </div>
+
+    <div class="Image">
+      <img
+        src="img/pikachu-ex.jpg"
+        alt="Carta Pikachu EX del JCC Pokémon, XY Promo 174, ilustración de 5ban Graphics">
+      <figcaption>Pikachu EX · XY174 · Ilustración especial</figcaption>
+    </div>
+
+    <div class="Description">
+      <h2>Ataques</h2>
+
+      <div class="attack">
+        <p class="attack__head">
+          <span class="cost" aria-label="Coste: 1 Rayo, 1 Incoloro">⚡ ⚪</span>
+          <span class="attack__name">Impactrueno</span>
+          <span class="attack__dmg">30</span>
+        </p>
+        <p class="attack__text">
+          Lanza 1 moneda. Si sale cara, el Pokémon Activo de tu rival pasa a
+          estar Paralizado.
+        </p>
+      </div>
+
+      <div class="attack">
+        <p class="attack__head">
+          <span class="cost" aria-label="Coste: 2 Rayo, 1 Incoloro">⚡ ⚡ ⚪</span>
+          <span class="attack__name">Megarrayo</span>
+          <span class="attack__dmg">160</span>
+        </p>
+        <p class="attack__text">
+          Descarta todas las Energías unidas a este Pokémon.
+        </p>
+      </div>
+
+      <p class="rule">
+        <strong>Regla para los Pokémon-EX:</strong> cuando un Pokémon-EX queda
+        Fuera de Combate, el rival toma 2 cartas de Premio.
+      </p>
+    </div>
+
+    <div class="Located">
+      <h2>Datos de combate</h2>
+      <ul class="stats">
+        <li><span>Debilidad</span> Lucha ×2</li>
+        <li><span>Resistencia</span> Metal −20</li>
+        <li><span>Coste de retirada</span> ⚪</li>
+      </ul>
+      <p class="set">Expansión: XY — Promo · N.º XY174 · ©2016 Pokémon</p>
+    </div>
+
+    <div class="Stars">
+      <p class="stars-label">Rareza</p>
+      <div class="rating" aria-label="5 de 5 estrellas">★ ★ ★ ★ ★</div>
+      <p class="stars-note">Ultra Rara · Carta Promocional</p>
+    </div>
+
+  </div>
+
+  <div class="holo-backdrop" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

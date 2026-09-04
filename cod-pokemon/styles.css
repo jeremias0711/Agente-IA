@@ -1,0 +1,602 @@
+/* ============================================================
+   1) ESTILOS BASE ("mobile-first")
+   ============================================================
+   Estas reglas se aplican a TODOS los tamaños de pantalla,
+   sin ninguna media query. Son el punto de partida.
+
+   La estrategia "mobile-first" significa: diseñas primero
+   para pantallas chicas (menos espacio, más simple), y luego
+   usas media queries para AGREGAR o CAMBIAR estilos cuando
+   hay más espacio disponible (tablets, laptops, monitores).
+
+   Es la práctica más recomendada porque:
+   - Los celulares cargan menos CSS de más (no descargan reglas
+     de escritorio que no van a usar).
+   - Te obliga a priorizar qué es lo más importante del diseño.
+============================================================ */
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 0.5fr 2fr 1fr 1fr 0.5fr;
+  grid-template-areas:
+    "Header Header Header"
+    ". Image ."
+    "Description Description Description"
+    "Located Located Located"
+    "Stars Stars Stars";
+}
+
+.Header      { grid-area: Header; }
+.Image       { grid-area: Image; }
+.Description { grid-area: Description; }
+.Located     { grid-area: Located; }
+.Stars       { grid-area: Stars; }
+
+
+/* ============================================================
+   1b) SKIN VISUAL — tema "Tinieblas Umbrías" (Pitch Black)
+   ============================================================
+   Antes esta sección era relleno temporal (colores planos y una
+   etiqueta con el nombre del área). Ahora contiene el estilo real
+   de la carta, inspirado en la galería del JCC Pokémon:
+   fondo oscuro y atmosférico, tipografía con serifas, acentos
+   dorados metálicos y adornos en las esquinas.
+
+   Nada de esto toca el layout: el grid de la sección 1 y de la
+   media query sigue mandando en CÓMO se acomodan las celdas.
+
+   Paleta (variables para reutilizar y cambiar en un solo lugar):
+============================================================ */
+
+:root {
+  --negro:        #0a0a0f;
+  --negro-carta:  #12121a;
+  --negro-celda:  #171722;
+  --morado:       #2b1d3a;
+  --morado-glow:  #6b3fa0;
+  --oro:          #c9a227;
+  --oro-claro:    #e7cf7a;
+  --texto:        #d8d8e0;
+  --texto-tenue:  #9a9aab;
+}
+
+body {
+  margin: 0;
+  font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+  color: var(--texto);
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(107, 63, 160, 0.35), transparent 70%),
+    radial-gradient(80% 60% at 50% 120%, rgba(107, 63, 160, 0.20), transparent 70%),
+    var(--negro);
+  padding: 24px 16px;
+  min-height: 100vh;
+}
+
+.container {
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 90vh;
+  padding: 14px;
+  background:
+    linear-gradient(180deg, var(--negro-carta), #0d0d14);
+  border: 2px solid var(--oro);
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.6) inset,
+    0 0 40px rgba(107, 63, 160, 0.35),
+    0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* Cada celda: fondo oscuro translúcido con filo dorado tenue */
+.container > div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px;
+  background: var(--negro-celda);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  border-radius: 10px;
+}
+
+/* --- Encabezado ------------------------------------------------ */
+.Header {
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, var(--morado), var(--negro-celda));
+  border-color: rgba(201, 162, 39, 0.45);
+}
+
+.Header .kicker {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oro-claro);
+}
+
+.Header h1 {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4vw, 2.1rem);
+  line-height: 1.15;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(107, 63, 160, 0.8);
+}
+
+.Header .sci {
+  margin: 0;
+  font-style: italic;
+  color: var(--texto-tenue);
+}
+
+.Header .hp {
+  font-family: "Cinzel", serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--negro);
+  background: linear-gradient(180deg, var(--oro-claro), var(--oro));
+  padding: 3px 12px;
+  border-radius: 999px;
+}
+
+/* Adornos de esquina (los <span class="corner">) */
+.corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--oro);
+}
+.corner--tl { top: 8px;  left: 8px;  border-right: 0; border-bottom: 0; }
+.corner--tr { top: 8px;  right: 8px; border-left: 0;  border-bottom: 0; }
+
+/* --- Ilustración --------------------------------------------- */
+.Image {
+  align-items: center;
+  padding: 12px;
+  background: #000;
+  min-height: 180px;
+}
+
+.Image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid rgba(201, 162, 39, 0.5);
+  border-radius: 6px;
+}
+
+.Image figcaption {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--texto-tenue);
+}
+
+/* --- Textos (Descripción / Ubicación) ----------------------- */
+.Description h2,
+.Located h2 {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--oro-claro);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+  padding-bottom: 6px;
+}
+
+.Description p,
+.Located p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Nombre de Pokémon-EX: la sigla "EX" en dorado */
+.Header h1 .ex {
+  font-size: 0.6em;
+  color: var(--oro-claro);
+  letter-spacing: 0.08em;
+}
+
+/* --- Ataques -------------------------------------------------- */
+.attack {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-bottom: 1px dotted rgba(201, 162, 39, 0.25);
+}
+
+.attack__head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.attack .cost {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}
+
+.attack__name {
+  flex: 1;
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.attack__dmg {
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--oro-claro);
+}
+
+.attack__text {
+  font-size: 0.9rem;
+  color: var(--texto-tenue);
+}
+
+/* Regla de los Pokémon-EX */
+.rule {
+  font-size: 0.85rem;
+  color: var(--texto-tenue);
+  border-left: 2px solid var(--oro);
+  padding-left: 10px;
+}
+
+.rule strong { color: var(--oro-claro); }
+
+/* --- Lista de datos de combate (Debilidad / Resistencia / …) - */
+.stats {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.stats li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dotted rgba(201, 162, 39, 0.25);
+  padding: 4px 0;
+  font-size: 0.92rem;
+}
+
+.stats li span {
+  font-family: "Cinzel", serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--oro-claro);
+}
+
+.set {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--texto-tenue);
+}
+
+/* --- Rareza / estrellas ------------------------------------- */
+.Stars {
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(180deg, var(--negro-celda), var(--morado));
+  border-color: rgba(201, 162, 39, 0.45);
+}
+
+.Stars .stars-label {
+  margin: 0;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
+}
+
+.Stars .rating {
+  font-size: 1.5rem;
+  letter-spacing: 0.15em;
+  color: var(--oro);
+  text-shadow: 0 0 12px rgba(201, 162, 39, 0.7);
+}
+
+.Stars .rating .empty { color: rgba(201, 162, 39, 0.3); }
+
+.Stars .stars-note {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--texto-tenue);
+}
+
+
+/* ============================================================
+   2) MEDIA QUERY — anatomía de la regla
+   ============================================================
+
+   @media (min-width: 720px) { ... }
+     │        │           │
+     │        │           └─ el VALOR del breakpoint (720px)
+     │        └───────────── la CONDICIÓN a evaluar
+     └────────────────────── la palabra clave que activa el bloque
+
+   "min-width: 720px" se lee como:
+   "aplica esto SOLO SI el ancho de la ventana es de
+   720px o más" (es decir, desde 720px hacia arriba).
+
+   Por eso combina tan bien con mobile-first: tus estilos base
+   ya cubren lo angosto, y aquí solo agregas lo que cambia
+   a partir de ese ancho en adelante.
+
+   Si hubieras usado "max-width: 720px" sería al revés:
+   "aplica esto SOLO SI el ancho es de 720px o MENOS"
+   (típico de un enfoque "desktop-first", donde empiezas
+   con estilos de escritorio y vas restringiendo hacia abajo).
+============================================================ */
+
+@media (min-width: 720px) {
+
+  /*
+    Dentro de las llaves del @media va CSS normal y corriente.
+    Aquí redefinimos .container con OTRO grid-template-areas.
+
+    Importante: como esta regla aparece DESPUÉS de la regla base
+    en el archivo, y tiene la misma especificidad (.container),
+    gana por orden de cascada cuando la condición se cumple.
+    Si el ancho es menor a 720px, el navegador simplemente
+    ignora todo este bloque y se queda con la regla base.
+  */
+  .container {
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 1.3fr 1.7fr 1fr 0.5fr;
+    grid-template-areas:
+      "Header Located Located Located Located"
+      "Header . Description . ."
+      "Header Stars Description Image Image"
+      "Header Stars Description Image Image"
+      "Header . . . .";
+  }
+
+  /*
+    No hace falta repetir "grid-area: Header;" etc. acá:
+    esas reglas no dependen del tamaño de pantalla, así que
+    ya quedaron definidas una sola vez arriba, en la sección base.
+  */
+}
+
+
+/* ============================================================
+   3) PARA SEGUIR APRENDIENDO — variantes útiles de media query
+   ============================================================
+
+   Varios breakpoints (mobile-first, cada uno agrega más ancho):
+
+     @media (min-width: 480px) { ... }   // celular grande
+     @media (min-width: 720px) { ... }   // tablet / el que usamos
+     @media (min-width: 1200px) { ... }  // escritorio grande
+
+   Combinar condiciones con "and" (ambas deben cumplirse):
+
+     @media (min-width: 720px) and (max-width: 1199px) {
+       // solo aplica en un RANGO: entre 720px y 1199px
+     }
+
+   Combinar con coma = "or" (basta con que se cumpla una):
+
+     @media (min-width: 1200px), print {
+       // aplica en pantallas grandes O al imprimir
+     }
+
+   Otras condiciones además del ancho:
+
+     (orientation: landscape)   // el dispositivo está horizontal
+     (prefers-color-scheme: dark) // el usuario tiene modo oscuro
+
+   Tip sobre los valores: acá usamos px porque es lo más directo
+   para aprender, pero en proyectos reales vas a ver breakpoints
+   en "em" (ej: 45em) — se mantienen estables aunque el usuario
+   cambie el tamaño de fuente del navegador, cosa que px no hace.
+============================================================ */
+
+
+/* ============================================================
+   4) CARTA HOLOGRÁFICA INTERACTIVA
+   ============================================================
+   Animaciones y estilos adaptados del repositorio de código
+   abierto "pokemon-cards-css" de @simeydotme
+   (https://github.com/simeydotme/pokemon-cards-css, licencia MIT).
+
+   Cómo funciona:
+   - script.js escucha el puntero sobre .card__rotator y escribe
+     variables CSS (--pointer-x, --rotate-x, --background-x, …).
+   - Aquí, esas variables alimentan:
+       * una inclinación 3D (rotateX / rotateY con perspective)
+       * una capa "shine" con degradado arcoíris (efecto foil)
+       * una capa "glare" (brillo radial que sigue al cursor)
+   - Las transiciones CSS suavizan el movimiento (el repo original
+     usa "springs" de Svelte; aquí lo aproximamos con transition).
+============================================================ */
+
+.holo-stage {
+  display: grid;
+  place-items: center;
+  padding: 40px 16px 24px;
+  perspective: 1600px;
+  position: relative;
+}
+
+/* mientras hay una carta ampliada, esta zona pasa por encima de la ficha */
+.holo-stage:has(.card.active) { z-index: 100; }
+
+.holo-stage__hint {
+  margin: 0 0 20px;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--texto-tenue, #9a9aab);
+  text-align: center;
+}
+
+.card {
+  /* paleta del efecto foil */
+  --red:    #f80e35;
+  --yellow: #eedf10;
+  --green:  #21e985;
+  --blue:   #0dbde9;
+  --violet: #c929f1;
+
+  --card-aspect: 0.718;
+  --card-radius: 4.55% / 3.5%;
+  --card-edge:  hsl(47, 100%, 78%);
+  --card-glow:  hsl(54, 87%, 63%);          /* tipo "lightning" */
+
+  /* recorte del "shine" a la ventana de ilustración de la carta */
+  --clip: inset(9.85% 8% 52.85% 8%);
+
+  /* variables dinámicas (valores por defecto; script.js los cambia) */
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --pointer-from-center: 0;
+  --pointer-from-top: 0.5;
+  --pointer-from-left: 0.5;
+  --card-opacity: 0;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --background-x: 50%;
+  --background-y: 50%;
+  --card-scale: 1;
+
+  width: min(340px, 82vw);
+  aspect-ratio: var(--card-aspect);
+  margin: 0 auto;
+  border-radius: var(--card-radius);
+  transform: translate3d(0, 0, 0.01px);
+  transform-style: preserve-3d;
+  will-change: transform;
+  z-index: calc(var(--card-scale) * 2);
+}
+
+.card.lightning { --card-glow: hsl(54, 87%, 63%); }
+.card.water     { --card-glow: hsl(192, 97%, 60%); }
+.card.fire      { --card-glow: hsl(9, 81%, 59%); }
+.card.psychic   { --card-glow: hsl(281, 62%, 58%); }
+
+.card__translater,
+.card__rotator {
+  display: grid;
+  border-radius: var(--card-radius);
+  transform-style: preserve-3d;
+}
+
+.card__translater {
+  transform: scale(var(--card-scale));
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card__rotator {
+  border: none;
+  padding: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+  transform: rotateY(var(--rotate-x)) rotateX(var(--rotate-y));
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.4s ease;
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.7);
+}
+
+.card.interacting .card__rotator {
+  transition: transform 0.08s ease-out, box-shadow 0.4s ease;
+  box-shadow:
+    0 0 3px -1px white,
+    0 0 3px 1px var(--card-edge),
+    0 0 12px 2px var(--card-glow),
+    0 12px 24px -8px rgba(0, 0, 0, 0.8),
+    0 0 40px -12px var(--card-glow);
+}
+
+.card__rotator > * {
+  grid-area: 1 / 1;
+  width: 100%;
+  aspect-ratio: var(--card-aspect);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.card__front {
+  display: block;
+  height: auto;
+  object-fit: cover;
+  transform: translate3d(0, 0, 0.01px);
+}
+
+/* --- Capa SHINE: foil arcoíris + líneas de escaneo ---------- */
+.card__shine {
+  --space: 5%;
+  --scanlines-space: 1px;
+  --scanlines-light: #666;
+  --scanlines-dark: black;
+
+  clip-path: var(--clip);
+  opacity: var(--card-opacity);
+  mix-blend-mode: color-dodge;
+  transform: translateZ(1px);
+
+  background-image:
+    repeating-linear-gradient(110deg,
+      var(--violet), var(--blue), var(--green), var(--yellow), var(--red),
+      var(--violet), var(--blue), var(--green), var(--yellow), var(--red),
+      var(--violet), var(--blue), var(--green), var(--yellow), var(--red)),
+    repeating-linear-gradient(90deg,
+      var(--scanlines-dark) calc(var(--scanlines-space) * 0),
+      var(--scanlines-dark) calc(var(--scanlines-space) * 2),
+      var(--scanlines-light) calc(var(--scanlines-space) * 2),
+      var(--scanlines-light) calc(var(--scanlines-space) * 4));
+  background-size: 400% 400%, cover;
+  background-position:
+    calc(((50% - var(--background-x)) * 2.6) + 50%)
+    calc(((50% - var(--background-y)) * 3.5) + 50%),
+    center center;
+  background-blend-mode: overlay;
+  filter: brightness(1.1) contrast(1.1) saturate(1.25);
+  transition: opacity 0.4s ease, background-position 0.2s ease-out;
+}
+
+/* --- Capa GLARE: brillo radial que sigue el puntero -------- */
+.card__glare {
+  transform: translateZ(1.4px);
+  opacity: calc(var(--card-opacity) * 0.85);
+  mix-blend-mode: overlay;
+  filter: brightness(0.85) contrast(1.5);
+  background-image: radial-gradient(
+    farthest-corner circle at var(--pointer-x) var(--pointer-y),
+    hsl(180, 100%, 95%) 5%,
+    hsla(0, 0%, 40%, 0.3) 55%,
+    hsla(0, 0%, 0%, 0.4) 110%);
+  transition: opacity 0.4s ease, background-image 0.2s ease-out;
+}
+
+/* --- Estado "ampliada" (clic sobre la carta) --------------- */
+.card.active { --card-scale: 1.5; z-index: 120; }
+
+.holo-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(5, 5, 10, 0.8);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.holo-backdrop.is-visible { opacity: 1; pointer-event
