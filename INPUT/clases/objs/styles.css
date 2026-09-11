@@ -1,0 +1,437 @@
+:root {
+    --color-bg: #1e1e2e;
+    --color-surface: #ffffff;
+    --color-text: #222;
+    --color-text-muted: #888;
+    --color-field-bg: #f0f0f0;
+    --color-border: #ddd;
+    --color-shadow: rgba(0, 0, 0, 0.3);
+    --color-banner-bg: #2b2b2b;
+    --color-banner-text: #ffffff;
+    --color-footer-bg: #000000;
+    --color-footer-text: #ffffff;
+    --color-brand: #e2231a;
+}
+
+[data-theme="dark"] {
+    --color-bg: #0f0f16;
+    --color-surface: #26263a;
+    --color-text: #f0f0f5;
+    --color-text-muted: #a0a0b8;
+    --color-field-bg: #32324a;
+    --color-border: #3d3d57;
+    --color-shadow: rgba(0, 0, 0, 0.6);
+    --color-banner-bg: #111118;
+    --color-banner-text: #ffffff;
+    --color-footer-bg: #000000;
+    --color-footer-text: #ffffff;
+    --color-brand: #ff5b50;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--color-bg);
+    font-family: system-ui, sans-serif;
+    transition: background 0.2s ease;
+}
+
+/* --- Botón modo oscuro --- */
+.theme-toggle {
+    justify-self: end;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-surface);
+    box-shadow: 0 2px 6px var(--color-shadow);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+/* --- Galería de héroes (mobile first) --- */
+.galeria {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    justify-items: center;
+}
+
+/* --- Carta (mobile first) --- */
+.card {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+    background: #000;
+    color: var(--color-text);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: 0 4px 12px var(--color-shadow);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Al pasar el cursor, la carta se agranda un poco. */
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 24px var(--color-shadow);
+}
+
+/* --- Bloque superior: insignias + imagen --- */
+.card__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    background: var(--color-surface);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.card__badges {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+}
+
+.card__badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 4px;
+    border-radius: 999px 8px 8px 999px;
+    color: #fff;
+}
+
+.card__badge dt {
+    order: 2;
+    margin: 0;
+    flex: 1;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.card__badge dd {
+    order: 1;
+    margin: 0;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.card__badge--fuerza { background: #e2574c; }
+.card__badge--edad { background: #4a9e58; }
+.card__badge--altura { background: #d8b955; }
+.card__badge--peso { background: #4a7fb5; }
+
+.card__image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #ddd;
+}
+
+/* --- Banner con el nombre --- */
+.card__banner {
+    text-align: center;
+    background: var(--color-banner-bg);
+    color: var(--color-banner-text);
+    border-radius: 10px;
+    padding: 10px 8px;
+}
+
+.card__name {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.card__alter-ego {
+    margin: 2px 0 0;
+    font-size: 0.75rem;
+    color: #bbb;
+}
+
+/* --- Franja de stats rápidos --- */
+.card__quickstats {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: var(--color-surface);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card__quickstat {
+    padding: 6px 4px;
+    border-right: 1px solid var(--color-border);
+}
+
+.card__quickstat:last-child {
+    border-right: none;
+}
+
+.card__quickstat dt {
+    margin: 0;
+    font-size: 0.6rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}
+
+.card__quickstat dd {
+    margin: 0;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+/* --- Caja de información / habilidades --- */
+.card__info,
+.card__poderes-wrap {
+    margin: 0;
+    background: var(--color-surface);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.card__info {
+    display: grid;
+    gap: 6px;
+    text-align: center;
+}
+
+.card__descripcion {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--color-text);
+}
+
+.card__info-line {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    margin: 0;
+}
+
+.card__info-line dt {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.card__info-line dt::after {
+    content: ":";
+}
+
+.card__info-line dd {
+    margin: 0;
+    color: var(--color-text);
+}
+
+.card__poderes-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.card__poderes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.card__poderes li {
+    font-size: 0.75rem;
+    color: var(--color-text);
+    background: var(--color-field-bg);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+}
+
+/* --- Barra inferior tipo logo --- */
+.card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.card__footer-brand {
+    font-weight: 800;
+    font-style: italic;
+    color: var(--color-brand);
+    font-size: 0.85rem;
+    text-transform: none;
+}
+
+.card__footer-brand--dc {
+    color: #0074d9;
+}
+
+/* --- Overlay: carta seleccionada al centro, el resto difuminado detrás --- */
+.card-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1000;
+}
+
+.card-overlay--visible {
+    display: flex;
+}
+
+.card-overlay .card--expanded {
+    width: min(92vw, 480px);
+    max-width: 480px;
+    cursor: default;
+    animation: expandir-carta 0.25s ease;
+}
+
+/* La carta expandida no debe seguir reaccionando al hover como en la galería */
+.card-overlay .card--expanded:hover {
+    transform: none;
+}
+
+.card-overlay__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 2px 6px var(--color-shadow);
+}
+
+@keyframes expandir-carta {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* --- Breakpoint 1: móviles grandes / tablets pequeñas --- */
+@media (min-width: 480px) {
+    .card {
+        max-width: 360px;
+    }
+
+    .card__top {
+        grid-template-columns: 100px 1fr;
+        align-items: stretch;
+    }
+
+    .card__badges {
+        grid-template-columns: 1fr;
+    }
+
+    .card__image {
+        height: auto;
+    }
+}
+
+/* --- Breakpoint 2: tablets --- */
+@media (min-width: 768px) {
+    .galeria {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+        max-width: 440px;
+        padding: 14px;
+        gap: 14px;
+    }
+
+    .card__top {
+        grid-template-columns: 120px 1fr;
+    }
+
+    .card__name {
+        font-size: 1.4rem;
+    }
+
+    .card__descripcion,
+    .card__info-line,
+    .card__poderes li {
+        font-size: 0.85rem;
+    }
+}
+
+/* --- Breakpoint 3: escritorio --- */
+@media (min-width: 1024px) {
+    .galeria {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+        max-width: 520px;
+        padding: 18px;
+        gap: 16px;
+    }
+
+    .card__top {
+        grid-template-columns: 140px 1fr;
+    }
+
+    .card__image {
+        min-height: 220px;
+    }
+}

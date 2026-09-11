@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objetos JS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Botón que alterna el tema claro/oscuro. El texto (🌙/☀️) y el atributo
+         data-theme del <html> se controlan desde index.js -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar modo oscuro">🌙</button>
+
+    <!-- Contenedor vacío: index.js llena esta sección con una ficha (.card)
+         por cada objeto del arreglo "heroes" -->
+    <section class="galeria" id="galeria"></section>
+
+    <!-- defer: el navegador descarga el script en paralelo pero lo ejecuta
+         recién cuando termina de parsear el HTML, así document.getElementById
+         ya encuentra el <section id="galeria"> -->
+    <script src="index.js" defer></script>
+</body>
+</html>
