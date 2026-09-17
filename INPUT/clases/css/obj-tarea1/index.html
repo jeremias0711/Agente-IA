@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Fast & Furious</title>
+
+    <!-- Tipografía "Rajdhani": una fuente condensada de estilo racing/tablero
+         de instrumentos, distinta a la fuente del sistema que usamos en la
+         tarea de superhéroes. Se carga desde Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado fijo con el título del garage y el botón de modo oscuro.
+         El texto del botón (🌙/☀️) y el atributo data-theme del <html>
+         se controlan desde index.js -->
+    <header class="topbar">
+        <h1 class="topbar__title">🏁 Garage Fast &amp; Furious</h1>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar modo oscuro">🌙</button>
+    </header>
+
+    <!-- Contenedor vacío: index.js llena esta sección con una ficha (.card)
+         por cada objeto del arreglo "autos" -->
+    <section class="garage" id="garage"></section>
+
+    <!-- defer: el navegador descarga el script en paralelo pero lo ejecuta
+         recién cuando termina de parsear el HTML, así document.getElementById
+         ya encuentra el <section id="garage"> -->
+    <script src="index.js" defer></script>
+</body>
+</html>
