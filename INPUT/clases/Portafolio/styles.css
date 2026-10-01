@@ -46,6 +46,27 @@ img { max-width: 100%; display: block; }
 
 ::selection { background: var(--purple); color: #fff; }
 
+.data-error {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 0.9rem 1.2rem;
+  background: #3a0d1f;
+  color: #ffd9e6;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.5;
+}
+.data-error code {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.82em;
+}
+
 /* ---------- Layout helpers ---------- */
 .section-tag {
   display: inline-block;
