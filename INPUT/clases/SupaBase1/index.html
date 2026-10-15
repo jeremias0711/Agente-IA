@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supabase App</title>
+</head>
+<body>
+  <header>
+    <h1>Supabase App</h1>
+  </header>
+
+  <main id="app">
+    <!-- El contenido se renderiza desde js/gestion.js -->
+  </main>
+
+  <!-- Orden de carga: cada script depende del anterior -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> <!-- 1° -->
+  <script src="js/supabaseClient.js"></script>  <!-- 2° -->
+  <script src="js/datos.js"></script>           <!-- 3° -->
+  <script src="js/gestion.js"></script>         <!-- 4° -->
+</body>
+</html>
