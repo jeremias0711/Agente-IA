@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de autos Fast &amp; Furious</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="pagina-gestion">
+
+  <section class="login" id="login">
+    <form id="form-login" class="formulario login-tarjeta">
+      <h1>Iniciar sesión</h1>
+      <label>Usuario
+        <input type="text" name="usuario" autocomplete="username" required>
+      </label>
+      <label>Contraseña
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <p class="login-error" id="login-error" hidden>Usuario o contraseña incorrectos.</p>
+      <button type="submit">Entrar</button>
+      <a class="sidebar-volver" href="index.html">← Volver al garage</a>
+    </form>
+  </section>
+
+  <div class="panel-admin" id="panel-admin" hidden>
+
+  <aside class="sidebar">
+    <h2>Gestión</h2>
+    <nav>
+      <button class="sidebar-item activo" data-vista="todos">Mostrar todos</button>
+      <button class="sidebar-item" data-vista="crear">Crear auto</button>
+      <button class="sidebar-item" data-vista="leer">Consultar auto</button>
+      <button class="sidebar-item" data-vista="actualizar">Actualizar auto</button>
+      <button class="sidebar-item" data-vista="eliminar">Eliminar auto</button>
+      <button class="sidebar-item" data-vista="usuarios">Usuarios registrados</button>
+    </nav>
+    <a class="sidebar-volver" href="index.html">← Volver al garage</a>
+    <button id="btn-cerrar-sesion" class="btn-cerrar-sesion">Cerrar sesión</button>
+  </aside>
+
+  <main class="contenido">
+
+    <section class="vista" id="vista-todos">
+      <h1>Todos los autos</h1>
+      <table id="tabla-autos">
+        <thead>
+          <tr><th>Nombre</th><th>Conductor</th><th>Película</th><th>Año</th><th>Tipo</th><th>Potencia (HP)</th><th>Vel. máx (km/h)</th><th>Estado</th><th>Robado</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section class="vista" id="vista-crear" hidden>
+      <h1>Crear auto</h1>
+      <form id="form-crear" class="formulario"></form>
+    </section>
+
+    <section class="vista" id="vista-leer" hidden>
+      <h1>Consultar auto</h1>
+      <select id="select-leer"></select>
+      <div id="detalle"></div>
+    </section>
+
+    <section class="vista" id="vista-actualizar" hidden>
+      <h1>Actualizar auto</h1>
+      <select id="select-actualizar"></select>
+      <form id="form-actualizar" class="formulario"></form>
+    </section>
+
+    <section class="vista" id="vista-eliminar" hidden>
+      <h1>Eliminar auto</h1>
+      <select id="select-eliminar"></select>
+      <button id="btn-eliminar" class="btn-eliminar">Eliminar</button>
+    </section>
+
+    <!-- Jugadores registrados desde game.html (localStorage "jugadores").
+         Para este ejercicio se muestra también la contraseña. -->
+    <section class="vista" id="vista-usuarios" hidden>
+      <h1>Usuarios registrados</h1>
+      <p class="usuarios-aviso">⚠️ Ejercicio: las contraseñas se muestran en texto plano.</p>
+      <table id="tabla-usuarios">
+        <thead>
+          <tr><th>ID</th><th>Nombre</th><th>Alias</th><th>Email</th><th>Contraseña</th><th>Partidas</th><th>Mejor tiempo</th><th>Última partida</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p class="usuarios-vacio" id="usuarios-vacio" hidden>Todavía no hay usuarios registrados. Regístrate desde el juego (🎮 en el garage).</p>
+    </section>
+
+  </main>
+
+  </div>
+
+  <script src="credenciales.js"></script>
+  <script src="login.js"></script>
+  <script src="data.js"></script>
+  <script src="gestion.js"></script>
+
+</body>
+</html>

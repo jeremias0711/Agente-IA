@@ -1,0 +1,399 @@
+/* =========================================================
+   PALETA DE COLORES
+   Misma paleta oscura del garage (obj-tarea1/styles.css).
+   ========================================================= */
+:root {
+    --color-bg: #0a0b0f;
+    --color-surface: #191b23;
+    --color-surface-2: #21242f;
+    --color-text: #f2f3f7;
+    --color-text-muted: #9198a8;
+    --color-border: #2b2f3b;
+    --color-shadow: rgba(0, 0, 0, 0.75);
+    --color-sidebar-bg: #05060a;
+    --color-accent: #ff4747;
+    --color-accent-2: #ffd60a;
+    --color-accent-3: #26d0ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Sin esto, las secciones con display: flex/grid ignorarían el
+   atributo hidden que usa gestion.js para mostrar y ocultar vistas. */
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: "Rajdhani", system-ui, sans-serif;
+    font-size: 1.05rem;
+}
+
+h1,
+h2 {
+    font-family: "Orbitron", "Rajdhani", sans-serif;
+    letter-spacing: 0.03em;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-size: 1.5rem;
+}
+
+/* --- Login --- */
+.login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background:
+        linear-gradient(135deg, rgba(255, 71, 71, 0.15), transparent 60%),
+        var(--color-bg);
+}
+
+.login-tarjeta {
+    width: 100%;
+    max-width: 380px;
+    padding: 28px;
+    background: var(--color-surface);
+    border-top: 4px solid var(--color-accent);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px var(--color-shadow);
+}
+
+.login-tarjeta h1 {
+    text-align: center;
+}
+
+.login-error {
+    margin: 0;
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.login-tarjeta .sidebar-volver {
+    margin-top: 4px;
+    text-align: center;
+}
+
+/* --- Panel: sidebar + contenido --- */
+.panel-admin {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 16px;
+    background: var(--color-sidebar-bg);
+    border-right: 1px solid var(--color-border);
+}
+
+.sidebar h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-accent-2);
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sidebar-item {
+    padding: 10px 12px;
+    border: none;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-item:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+.sidebar-item.activo {
+    background: var(--color-surface);
+    border-left-color: var(--color-accent);
+    color: var(--color-text);
+}
+
+.sidebar-volver {
+    margin-top: auto;
+    color: var(--color-accent-3);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.sidebar-volver:hover {
+    text-decoration: underline;
+}
+
+.contenido {
+    flex: 1;
+    min-width: 0;
+    padding: 32px;
+}
+
+/* --- Tabla de autos --- */
+.vista table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    background: var(--color-surface);
+    border-radius: 10px;
+}
+
+th,
+td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    white-space: nowrap;
+}
+
+th {
+    background: var(--color-surface-2);
+    color: var(--color-accent-2);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tbody tr:hover {
+    background: var(--color-surface-2);
+}
+
+/* --- Formularios --- */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 560px;
+}
+
+.formulario label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+}
+
+/* Las casillas (robado, sobrealimentado) van en línea con su texto. */
+.formulario label:has(input[type="checkbox"]) {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+}
+
+input,
+select {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    font: inherit;
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-accent);
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid var(--color-accent-3);
+    outline-offset: 1px;
+}
+
+select {
+    min-width: 280px;
+    max-width: 100%;
+    margin-bottom: 18px;
+}
+
+button[type="submit"],
+.btn-eliminar {
+    align-self: flex-start;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 6px;
+    background: var(--color-accent);
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+button[type="submit"]:hover,
+.btn-eliminar:hover {
+    filter: brightness(1.15);
+}
+
+.login-tarjeta button[type="submit"] {
+    align-self: stretch;
+}
+
+.btn-eliminar {
+    display: block;
+}
+
+/* --- Detalle de un auto (Consultar) --- */
+#detalle {
+    max-width: 560px;
+    padding: 8px 20px;
+    background: var(--color-surface);
+    border-left: 4px solid var(--color-accent-2);
+    border-radius: 8px;
+}
+
+#detalle:empty {
+    display: none;
+}
+
+#detalle p {
+    margin: 10px 0;
+}
+
+/* --- Pantallas pequeñas: el sidebar pasa arriba --- */
+@media (max-width: 720px) {
+    .panel-admin {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .contenido {
+        padding: 20px 16px;
+    }
+
+    select {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+/* --- Botón de cerrar sesión (debajo de "Volver al garage") --- */
+.btn-cerrar-sesion {
+    padding: 9px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-cerrar-sesion:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* --- Juego (game.html): lista de requisitos de la contraseña --- */
+.requisitos {
+    margin: -4px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+}
+
+.requisitos li::before {
+    content: "✕ ";
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.requisitos li.cumple {
+    color: var(--color-text);
+}
+
+.requisitos li.cumple::before {
+    content: "✓ ";
+    color: #3ddc84;
+}
+
+/* --- Juego: estado de la expresión regular debajo de la contraseña --- */
+.estado-contrasena {
+    margin: 0;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.estado-contrasena:empty {
+    display: none;
+}
+
+.estado-contrasena--valida {
+    color: #3ddc84;
+}
+
+.formulario input.input-invalido {
+    border-color: var(--color-accent);
+}
+
+.formulario input.input-valido {
+    border-color: #3ddc84;
+}
+
+/* --- Juego: aclaración "(solo para registrarte)" en nombre y alias --- */
+.formulario label small {
+    font-weight: 500;
+    opacity: 0.75;
+}
+
+/* --- Gestión: pestaña de usuarios registrados --- */
+.usuarios-aviso {
+    margin: -8px 0 16px;
+    color: var(--color-accent-2);
+    font-weight: 600;
+}
+
+.usuarios-vacio {
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+/* La contraseña (5a columna) en fuente monoespaciada para leerla carácter por carácter. */
+#tabla-usuarios td:nth-child(5) {
+    font-family: Consolas, "Courier New", monospace;
+    color: var(--color-accent-2);
+}

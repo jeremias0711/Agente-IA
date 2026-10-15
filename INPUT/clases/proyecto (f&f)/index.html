@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Fast & Furious</title>
+
+    <!-- Tipografía "Rajdhani": una fuente condensada de estilo racing/tablero
+         de instrumentos, distinta a la fuente del sistema que usamos en la
+         tarea de superhéroes. Se carga desde Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado fijo con el título del garage y el botón de modo oscuro.
+         El texto del botón (🌙/☀️) y el atributo data-theme del <html>
+         se controlan desde index.js -->
+    <header class="topbar">
+        <h1 class="topbar__title">🏁 Garage Fast &amp; Furious</h1>
+        <button id="btn-juego" class="topbar__link topbar__link--juego">🎮 Juego</button>
+        <a class="topbar__link" href="gestion.html">⚙️ Gestión</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar modo oscuro">🌙</button>
+    </header>
+
+    <!-- Barra de filtros sobre las cartas. El botón alterna entre ver todos
+         los autos y ver solo los robados (lo maneja index.js). -->
+    <section class="filtros">
+        <button id="filtro-robados" class="filtro-btn" aria-pressed="false">🚨 Solo robados</button>
+        <!-- Las opciones (un dueño por opción) las crea index.js a partir de los datos. -->
+        <label class="filtro-dueno">
+            <span class="filtro-dueno__label">👤 Dueño</span>
+            <select id="filtro-dueno" class="filtro-dueno__select">
+                <option value="">Todos</option>
+            </select>
+        </label>
+        <button id="limpiar-filtros" class="filtro-limpiar">✕ Limpiar filtros</button>
+        <span id="filtro-contador" class="filtro-contador"></span>
+    </section>
+
+    <!-- Contenedor vacío: index.js llena esta sección con una ficha (.card)
+         por cada objeto del arreglo "autos" -->
+    <section class="garage" id="garage"></section>
+
+    <!-- Ventana del juego: carga game.html dentro de un iframe, encima de las
+         cartas. El iframe mantiene separados los estilos y el código del
+         juego. index.js le pone el src la primera vez que se abre. -->
+    <div class="juego-modal" id="juego-modal" hidden>
+        <div class="juego-modal__caja">
+            <button class="juego-modal__cerrar" id="juego-cerrar" aria-label="Cerrar juego">✕</button>
+            <iframe class="juego-modal__iframe" id="juego-iframe" title="Juego Fast &amp; Furious"></iframe>
+        </div>
+    </div>
+
+    <!-- Barra fija en la parte inferior: el slider filtra por velocidad
+         máxima. index.js pone el rango (min/max) según los datos y vuelve
+         a pintar las cartas en cada movimiento. -->
+    <section class="filtro-velocidad">
+        <label for="slider-velocidad" class="filtro-velocidad__label">🏎️ Velocidad máx.</label>
+        <input type="range" id="slider-velocidad" class="filtro-velocidad__slider" step="10">
+        <output id="valor-velocidad" class="filtro-velocidad__valor" for="slider-velocidad"></output>
+    </section>
+
+    <!-- defer: el navegador descarga el script en paralelo pero lo ejecuta
+         recién cuando termina de parsear el HTML, así document.getElementById
+         ya encuentra el <section id="garage"> -->
+    <script src="data.js" defer></script>
+    <script src="index.js" defer></script>
+</body>
+</html>

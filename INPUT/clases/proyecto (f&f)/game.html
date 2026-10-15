@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego Fast &amp; Furious</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Reutiliza los estilos del login de gestión (.login, .login-tarjeta, .formulario) -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Estilos del juego de memoria (todas las reglas empiezan con .memoria) -->
+  <link rel="stylesheet" href="memoria.css">
+</head>
+
+<body>
+
+  <!-- Paso 1: login o registro del jugador. game.js valida email y contraseña con
+       expresiones regulares y busca al jugador en localStorage ("jugadores"). -->
+  <section class="login" id="registro">
+    <form id="form-registro" class="formulario login-tarjeta" novalidate>
+      <h1>Ingresa o regístrate</h1>
+
+      <label>Nombre <small>(solo para registrarte)</small>
+        <input type="text" name="nombre" autocomplete="name">
+      </label>
+
+      <label>Alias <small>(solo para registrarte)</small>
+        <input type="text" name="alias" autocomplete="nickname">
+      </label>
+
+      <label>Email
+        <input type="email" name="email" autocomplete="email" required aria-describedby="estado-email">
+      </label>
+
+      <!-- Resultado de la expresión regular del email, se actualiza en cada tecla -->
+      <p class="estado-contrasena" id="estado-email" aria-live="polite"></p>
+
+      <label>Contraseña
+        <input type="password" name="contrasena" autocomplete="new-password" required aria-describedby="requisitos">
+      </label>
+
+      <!-- Cada requisito se marca en verde (clase "cumple") mientras se escribe -->
+      <ul class="requisitos" id="requisitos">
+        <li data-requisito="mayuscula">Al menos 1 letra mayúscula</li>
+        <li data-requisito="numeros">Al menos 7 números</li>
+        <li data-requisito="especial">Al menos 1 carácter especial (!@#$%&amp;*…)</li>
+      </ul>
+
+      <!-- Resultado de la expresión regular completa, se actualiza en cada tecla -->
+      <p class="estado-contrasena" id="estado-contrasena" aria-live="polite"></p>
+
+      <p class="login-error" id="registro-error" hidden></p>
+      <button type="submit">Continuar</button>
+      <!-- target="_top": si el juego está dentro del garage (iframe), el enlace
+           abre el garage en la ventana completa y no dentro del recuadro. -->
+      <a class="sidebar-volver" id="volver-garage" href="index.html" target="_top">← Volver al garage</a>
+    </form>
+  </section>
+
+  <!-- Paso 2: juego de memoria. Se muestra solo después del login.
+       memoria.js llena el tablero con autos de data.js / localStorage. -->
+  <section class="memoria" id="juego" hidden>
+
+    <header class="memoria__hud">
+      <h1 class="memoria__titulo" id="bienvenida"></h1>
+      <div class="memoria__stats">
+        <div class="memoria__stat">
+          <span class="memoria__valor" id="hud-timer">00:00</span>
+          <span class="memoria__label">Tiempo</span>
+        </div>
+        <div class="memoria__stat">
+          <span class="memoria__valor" id="hud-intentos">0</span>
+          <span class="memoria__label">Intentos</span>
+        </div>
+        <div class="memoria__stat">
+          <span class="memoria__valor" id="hud-pares">0/0</span>
+          <span class="memoria__label">Pares</span>
+        </div>
+      </div>
+      <button class="memoria__btn" id="btn-reiniciar">↺ Reiniciar</button>
+    </header>
+
+    <p class="memoria__ayuda">Voltea dos cartas y encuentra las parejas de autos.</p>
+    <p class="memoria__aviso" id="memoria-aviso" hidden></p>
+
+    <div class="memoria__tablero" id="tablero"></div>
+
+    <!-- Ventana de victoria -->
+    <div class="memoria__overlay" id="overlay-victoria" hidden>
+      <div class="memoria__modal">
+        <div class="memoria__trofeo">🏆</div>
+        <h2>¡Ganaste!</h2>
+        <p class="memoria__rango" id="rango-titulo"></p>
+        <p class="memoria__rango-desc" id="rango-desc"></p>
+        <div class="memoria__stats memoria__stats--final">
+          <div class="memoria__stat">
+            <span class="memoria__valor" id="stat-tiempo">--:--</span>
+            <span class="memoria__label">Tiempo</span>
+          </div>
+          <div class="memoria__stat">
+            <span class="memoria__valor" id="stat-intentos">0</span>
+            <span class="memoria__label">Intentos</span>
+          </div>
+        </div>
+        <button class="memoria__btn memoria__btn--principal" id="btn-jugar-de-nuevo">Jugar de nuevo</button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- data.js: el arreglo "autos" (los mismos del garage y gestión).
+       game.js: login/registro. memoria.js: el juego de memoria. -->
+  <script src="data.js"></script>
+  <script src="game.js"></script>
+  <script src="memoria.js"></script>
+
+</body>
+</html>
