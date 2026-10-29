@@ -1,6 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; }
+    #btn-traer { padding: 10px 16px; font-size: 1rem; }
+    #resultado { margin-top: 16px; }
+
+    /* Galería: columnas automáticas, 1 en celular y más en pantallas anchas */
+    .galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .tarjeta { border: 1px solid #ddd; border-radius: 12px; overflow: hidden; background: #fff;
+               box-shadow: 0 2px 6px rgba(0,0,0,.08); display: flex; flex-direction: column; }
+    .foto { position: relative; aspect-ratio: 1 / 1; background: #f0f0f0; }
+    .foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sin-img { display: block; padding: 12px; color: #b00020; word-break: break-all; font-size: .75rem; }
+    .etiqueta { position: absolute; top: 8px; padding: 4px 8px; border-radius: 999px;
+                font-size: .8rem; font-weight: 600; color: #fff; }
+    .etiqueta.desc { left: 8px; background: #d93025; }
+    .etiqueta.agot { right: 8px; background: #555; }
+    .tarjeta.agotado .foto img { filter: grayscale(1); opacity: .7; }
+    .info { padding: 12px; }
+    .info h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .info p { margin: 4px 0; }
+    .desc-texto { color: #555; font-size: .9rem; }
+    .precio strong { font-size: 1.2rem; }
+    .precio s { color: #888; margin-left: 6px; }
+    .unidades { color: #555; font-size: .85rem; }
+    .cats span { display: inline-block; background: #eef2ff; color: #3b4cca; border-radius: 999px;
+                 padding: 2px 8px; margin: 2px 4px 0 0; font-size: .75rem; }
+  </style>
   <!-- CDN: trae la librería de Supabase ANTES que nuestros propios
        scripts — sin esta línea, "supabase.createClient" no existiría
        todavía cuando supabaseClient.js intente usarlo -->
@@ -9,8 +38,8 @@
 <body>
 
   <button id="btn-traer">Traer productos</button>
+  <!-- prueba.js dibuja aquí la tabla de productos -->
   <div id="resultado"></div>
-
   <!-- supabaseClient.js crea "db" (sección 4.3): el cliente ya
        conectado a tu proyecto de Supabase. Lo vamos a usar en
        prueba.js, por eso tiene que cargarse ANTES que ese archivo -->
@@ -19,6 +48,4 @@
   <script src="js/prueba.js"></script>
 </body>
 </html>
-
-
-//https://klhkfegfngcygjbpjatc.supabase.co/rest/v1/productos_practica//
+ 

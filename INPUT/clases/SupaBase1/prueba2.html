@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tap.css">
+  <!-- tema.js va en <head> para aplicar el modo oscuro antes de pintar la página -->
+  <script src="js/tema.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <div class="anuncio">Agrega, busca y elimina productos · Práctica con Supabase</div>
+
+  <!-- Cabecera: modo oscuro a la izquierda, logo al centro, menú de búsqueda arriba a la derecha -->
+  <header class="cabecera">
+    <div class="cabecera-in">
+      <button id="btn-tema" type="button">🌙 Modo oscuro</button>
+
+      <div class="marca">Productos <small>Tu catálogo</small></div>
+
+      <!-- Buscar: menú desplegable. prueba2.js consulta Supabase con estos dos cajones. -->
+      <details class="menu-buscar" id="menu-buscar">
+        <summary>Buscar</summary>
+        <div class="menu-contenido">
+          <form id="form-buscar">
+            <label>ID <input name="id" type="number" min="1" step="1" placeholder="Ej: 2"></label>
+            <label>Nombre <input name="nombre" type="search" placeholder="Ej: silla"></label>
+            <button type="submit">Buscar</button>
+            <button type="reset" id="btn-limpiar">Limpiar</button>
+          </form>
+          <div id="resultado-busqueda"></div>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Productos que dan <span>gusto</span> :)</h1>
+    <p>Explora el catálogo, busca por ID o nombre y agrega los tuyos al final de la página.</p>
+  </section>
+
+  <!-- 1. PRODUCTOS: lo primero que se ve -->
+  <main class="seccion-productos">
+    <section class="panel">
+      <div class="titulo-fila">
+        <h2>Productos</h2>
+        <button id="btn-traer" type="button">Actualizar</button>
+      </div>
+      <div id="resultado"></div>
+    </section>
+  </main>
+
+  <!-- 2. NUEVO PRODUCTO: sección inferior con fondo distinto -->
+  <section class="seccion-nuevo">
+    <div class="seccion-nuevo-in">
+      <h2>Nuevo producto</h2>
+      <p class="sub">Llena el formulario y se guarda directo en tu base de datos.</p>
+      <!-- prueba2.js lo envía a la tabla productos_practica. -->
+      <form id="form-producto">
+        <label>Nombre <input name="nombre" required></label>
+        <label>Precio (COP) <input name="precio" type="number" min="0" step="1" required></label>
+        <label class="ancho-2">Descripción <textarea name="descripcion" rows="2" required></textarea></label>
+        <label>Unidades <input name="unidades" type="number" min="0" step="1" value="1" required></label>
+        <label>Descuento (%) <input name="descuento" type="number" min="0" max="100" step="1" value="0"></label>
+        <label>Categorías (separadas por coma) <input name="categorias" placeholder="tecnología, audio"></label>
+        <label>URL de la imagen <input name="Img_url" type="url" placeholder="https://..."></label>
+        <label class="check"><input name="disponible" type="checkbox" checked> Disponible</label>
+        <button type="submit">Guardar producto</button>
+      </form>
+      <div id="mensaje-form"></div>
+
+      <div class="prueba-rapida">
+        <button id="btn-agregar-producto" type="button">Agregar producto de prueba</button>
+        <div id="notificacion"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- supabaseClient.js crea "db": el cliente ya conectado a tu proyecto de
+       Supabase. Debe cargarse ANTES que prueba2.js, que lo usa. -->
+  <script src="js/supabaseClient.js"></script>
+  <script src="js/prueba2.js"></script>
+</body>
+</html>
